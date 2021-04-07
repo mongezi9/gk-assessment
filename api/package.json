@@ -1,0 +1,18 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "newman_test2": "newman run openweathermap_suite.postman_collection.json -e envs.postman_globals.json --reporters htmlextra,cli --reporter-htmlextra-export ./newman/report.html ",
+    "newman_test":"newman run openweathermap_suite.postman_collection.json -r htmlextra"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "newman": "^5.2.2",
+    "newman-reporter-htmlextra": "^1.20.3"
+  }
+}
