@@ -3,17 +3,27 @@
 	"values": [
 		{
 			"key": "base_url",
-			"value": "api.openweathermap.org/data/2.5",
+			"value": "api.openweathermap.org/data/",
 			"enabled": true
 		},
 		{
 			"key": "api_key",
 			"value": "6aa46c888a6e3fa4f0e9195c9a6e3a01",
 			"enabled": true
+		},
+		{
+			"key": "version_2",
+			"value": "2.5",
+			"enabled": true
+		},
+		{
+			"key": "version_3",
+			"value": "3.0",
+			"enabled": true
 		}
 	],
 	"name": "My Workspace Globals",
 	"_postman_variable_scope": "globals",
-	"_postman_exported_at": "2021-04-05T20:05:03.845Z",
+	"_postman_exported_at": "2021-04-09T00:19:20.887Z",
 	"_postman_exported_using": "Postman/8.1.0"
 }

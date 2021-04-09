@@ -375,11 +375,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/weather?q=London&appid={{api_key}}",
+									"raw": "{{base_url}}/{{version_2}}/weather?q=London&appid={{api_key}}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
+										"{{version_2}}",
 										"weather"
 									],
 									"query": [
@@ -452,18 +453,191 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/weather?q=L%23$%^%26*()_&appid={{api_key}}",
+									"raw": "{{base_url}}/{{version_2}}/weather?q=L%23$%^%26*()_&appid={{api_key}}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
+										"{{version_2}}",
 										"weather"
 									],
 									"query": [
 										{
 											"key": "q",
-											"value": "L#$%^&*()_"
+											"value": "L%23$%^%26*()_"
 										},
+										{
+											"key": "appid",
+											"value": "{{api_key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "weather_stations",
+			"item": [
+				{
+					"name": "create_station",
+					"item": [
+						{
+							"name": "TC-01 | Should register stations when providing correct data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"  pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test('Schema is valid', function() {\r",
+											"    const schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"ID\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"updated_at\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"created_at\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"user_id\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"external_id\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"name\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"latitude\": {\r",
+											"      \"type\": \"number\"\r",
+											"    },\r",
+											"    \"longitude\": {\r",
+											"      \"type\": \"number\"\r",
+											"    },\r",
+											"    \"altitude\": {\r",
+											"      \"type\": \"integer\"\r",
+											"    },\r",
+											"    \"rank\": {\r",
+											"      \"type\": \"integer\"\r",
+											"    },\r",
+											"    \"source_type\": {\r",
+											"      \"type\": \"integer\"\r",
+											"    }\r",
+											"  }\r",
+											"};\r",
+											"  pm.response.to.have.jsonSchema(schema);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "app",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"external_id\": \"SF_TEST001\",\r\n  \"name\": \"San Francisco Test Station\",\r\n  \"latitude\": 37.76,\r\n  \"longitude\": -122.43,\r\n  \"altitude\": 150\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/{{version_3}}/stations?appid={{api_key}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{version_3}}",
+										"stations"
+									],
+									"query": [
+										{
+											"key": "appid",
+											"value": "{{api_key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TC-02 | Should not able to register stations when providing incorrect data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {\r",
+											"  pm.response.to.have.status(500);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"external_id\": \"\",\r\n  \"name\": \"\",\r\n  \"latitude\": 0.0,\r\n  \"longitude\": 0.0,\r\n  \"altitude\":0.0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/{{version_3}}/triggers?appid={{api_key}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{version_3}}",
+										"triggers"
+									],
+									"query": [
 										{
 											"key": "appid",
 											"value": "{{api_key}}"
