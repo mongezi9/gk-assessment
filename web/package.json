@@ -1,5 +1,5 @@
 {
-  "name": "nightwatch-saucelabs",
+  "name": "web",
   "version": "0.0.1",
   "description": "Nightwatch.js tests for the website - https://nightwatchjs.org",
   "main": "index.js",
